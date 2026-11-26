@@ -815,6 +815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57722a64d01dced64664b00e2e94b0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SalvageSprint.Runtime::SalvageSprint.Navigator
+  failedRequestRetryDelay: 1
+  logNavigationFailures: 1
+  lastFailure: None
 --- !u!195 &550305388
 NavMeshAgent:
   m_ObjectHideFlags: 0

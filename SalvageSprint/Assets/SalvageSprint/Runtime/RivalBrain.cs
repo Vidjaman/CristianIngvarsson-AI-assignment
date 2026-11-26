@@ -38,18 +38,29 @@ namespace SalvageSprint
 
         private void Update()
         {
-            if (!match.IsRunning) { navigator.Cancel(); return; }
+            if (!match.IsRunning) { navigator.Cancel();
+                return; }
+           
             TravelStatus travel = navigator.Poll();
-            if (Time.time < nextDecision) return;
+           
+            
+            if (Time.time < nextDecision)
+                return;
+
             nextDecision = Time.time + decisionInterval;
+
             if (travel == TravelStatus.Failed && rememberedId >= 0)
             {
                 failedUntil[rememberedId] = Time.time + 6;
                 LastFailure = "Route failed for pickup " + rememberedId + "; ignore for 6 seconds";
             }
-            if (rememberedId >= 0 && !match.IsAvailable(rememberedId)) rememberedId = -1;
+
+            if (rememberedId >= 0 && !match.IsAvailable(rememberedId))
+                rememberedId = -1;
+            
             if (CurrentDecision.Task == TaskKind.Explore
                 && (travel == TravelStatus.Arrived || travel == TravelStatus.Failed))
+                
                 surveyIndex = (surveyIndex + 1) % surveyPoints.Length;
 
             LastObservation = sensor.Capture(actor, rememberedId, IsBlocked);
@@ -63,6 +74,7 @@ namespace SalvageSprint
 
             if (next.Task == TaskKind.Deliver)
             {
+ 
                 rememberedId = -1;
                 navigator.Request(-2, actor.DepotPosition);
             }

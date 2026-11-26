@@ -812,7 +812,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 37e8912e656782541b6739e4629fb267, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ba645e171bf82c24ea9bcd9ada71f310, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &594600538
 Transform:
@@ -1560,6 +1560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57722a64d01dced64664b00e2e94b0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SalvageSprint.Runtime::SalvageSprint.Navigator
+  failedRequestRetryDelay: 1
+  logNavigationFailures: 1
+  lastFailure: None
 --- !u!195 &1403928911
 NavMeshAgent:
   m_ObjectHideFlags: 0
