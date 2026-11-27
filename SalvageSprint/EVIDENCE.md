@@ -19,13 +19,15 @@ One question about NPC behaviour:
 
 Use one actual situation. Include the observation data, derived facts, selected task and reason, movement request/result, and how feedback affects a later decision. Identify the responsible code locations. A tiny state diagram can accompany this trace.
 
+In the f4 Scene, the Ai will first make an observation of where the nearest pickups are. It will then infer facts from the observation it will ignore the closest pickup as it is invisible and pick the second closest pickup as the best candidate. It will then Choose to go towards the pickup and will request the navigator script to make the navmesh agent move towards the pickup, after picking it up it will return to the depot, once returned to the depot it will observe and infer again. This time there are no viable candidates so it will survey until the remaining pickup is within line of sight. It will then go to it, pick it up and return to the depot.
+
 ## Scenario record
 
 | Scenario | Predicted result | Observed result and short evidence / remaining issue |
 |---|---|---|
-| Normal loop and restart |  | |
-| Carrying cargo | Return To depot | It returns to the depot |
-| Hidden / remembered pickup |  | |
+| Normal loop and restart | Collects and returns | The AI will go to the closest scrap it can see and pick it up, if it is holding a pickup it will return to the depot to drop it off, if the ai can not see a pickup it will survey the map |
+| Carrying cargo | Return To depot | The ai returns to the depot to  |
+| Hidden / remembered pickup | Ignores it | The AI will survey the map until the hidden pickup is in view and the it will pick it up |
 | Target taken | It finds the next best target | It find the next closest target |
 | Unreachable target | Ignore | It searches for other scrap and gives an error every 6 seconds because it tries to find a way to the unreachable scrap |
 | No usable pickup | Explore | It goes around to every survey point in a loop |
@@ -35,9 +37,7 @@ Live walkthrough checked by / recording link if used:
 
 ## One correction and one independent check
 
-The original weakness and why it happened:
-What I changed and why it addresses the cause:
-My counterexample or experiment: prediction, observed result, and one limitation:
+
 It got stuck when there was a piece of scrap that was unobtainable. I fixed it by making a change in the DecisionPolicy and making it so a piece of scrap gets ignored if its blocked
 
 ## Collaboration and help
